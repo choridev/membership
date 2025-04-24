@@ -55,7 +55,7 @@ public class MembershipController {
     @GetMapping("/api/v1/memberships/{id}")
     public ResponseEntity<MembershipDetailResponseDto> getMembership(
             @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable final Long id) {
+            @PathVariable("id") final Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(membershipService.getMembership(id, userId));
     }
@@ -63,7 +63,7 @@ public class MembershipController {
     @DeleteMapping("/api/v1/memberships/{id}")
     public ResponseEntity<Void> removeMembership(
             @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable final Long id) {
+            @PathVariable("id") final Long id) {
 
         membershipService.removeMembership(id, userId);
 
@@ -73,7 +73,7 @@ public class MembershipController {
     @PatchMapping("/api/v1/memberships/{id}")
     public ResponseEntity<MembershipPointResponseDto> addMembershipPoint(
             @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable final Long id,
+            @PathVariable("id") final Long id,
             @RequestBody @Valid final MembershipPointRequestDto membershipPointRequestDto) {
 
         final MembershipPointResponseDto membershipPointResponseDto = membershipService
