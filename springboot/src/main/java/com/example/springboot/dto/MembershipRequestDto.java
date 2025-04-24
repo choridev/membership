@@ -4,20 +4,23 @@ import com.example.springboot.entity.MembershipType;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Builder
 public class MembershipRequestDto {
 
     @NotNull
-    private final MembershipType membershipType;
+    private MembershipType membershipType;
 
     @NotNull
     @Min(0)
-    private final Integer point;
+    private Integer point;
 
 }
