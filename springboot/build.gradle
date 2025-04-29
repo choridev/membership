@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
 }
 
 group = 'com.example'
@@ -11,6 +12,10 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+}
+
+jacoco {
+	toolVersion = '0.8.13'
 }
 
 configurations {
@@ -33,8 +38,59 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'com.google.code.gson:gson:2.8.9'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy 'jacocoTestReport'
+}
+
+jacocoTestReport {
+    reports {
+        html.outputLocation = layout.buildDirectory.dir("reports/jacoco")
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true // Apply test coverage
+            element = 'CLASS' // Test coverage unit
+
+            // Line coverage
+            // Test coverage must be greater than 90%
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+
+			// Maximum number of lines in a file
+			limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 500
+            }
+
+			// Branch coverage
+			// Test coverage must be greater than 90%
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.70
+            }
+        }
+    }
+
+	// Classes exclued from the result report
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, excludes: [
+                            '**/SpringbootApplication.class'
+                    ])
+        }))
+    }
 }
