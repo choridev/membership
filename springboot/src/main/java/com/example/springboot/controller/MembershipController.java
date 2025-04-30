@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -79,30 +78,6 @@ public class MembershipController {
 
         final MembershipPointResponseDto membershipPointResponseDto = membershipService
                 .addMembershipPoint(id, userId, membershipPointRequestDto.getPoint());
-
-        return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
-    }
-
-    @PatchMapping("/api/v1/memberships/{test}/test")
-    public ResponseEntity<MembershipPointResponseDto> addMembershipPointTest(
-            @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable("test") final Long test,
-            @RequestBody @Valid final MembershipPointRequestDto membershipPointRequestDto) {
-
-        final MembershipPointResponseDto membershipPointResponseDto = membershipService
-                .addMembershipPoint(test, userId, membershipPointRequestDto.getPoint());
-
-        return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
-    }
-
-    @PutMapping("/api/v1/memberships/{test}/test")
-    public ResponseEntity<MembershipPointResponseDto> addMembershipPointTestPut(
-            @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable("test") final Long test,
-            @RequestBody @Valid final MembershipPointRequestDto membershipPointRequestDto) {
-
-        final MembershipPointResponseDto membershipPointResponseDto = membershipService
-                .addMembershipPoint(test, userId, membershipPointRequestDto.getPoint());
 
         return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
     }
