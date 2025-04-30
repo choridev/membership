@@ -67,7 +67,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
-                minimum = 0.10
+                minimum = 0.80
             }
 
 			// Maximum number of lines in a file
@@ -82,7 +82,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = 'BRANCH'
                 value = 'COVEREDRATIO'
-                minimum = 0.10
+                minimum = 0.70
             }
         }
     }
