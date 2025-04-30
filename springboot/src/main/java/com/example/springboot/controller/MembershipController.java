@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequiredArgsConstructor
@@ -78,6 +79,18 @@ public class MembershipController {
 
         final MembershipPointResponseDto membershipPointResponseDto = membershipService
                 .addMembershipPoint(id, userId, membershipPointRequestDto.getPoint());
+
+        return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
+    }
+
+    @PatchMapping("/api/v1/memberships/{test}/test")
+    public ResponseEntity<MembershipPointResponseDto> addMembershipPointTest(
+            @RequestHeader(USER_ID_HEADER) final String userId,
+            @PathVariable("test") final Long test,
+            @RequestBody @Valid final MembershipPointRequestDto membershipPointRequestDto) {
+
+        final MembershipPointResponseDto membershipPointResponseDto = membershipService
+                .addMembershipPoint(test, userId, membershipPointRequestDto.getPoint());
 
         return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
     }
