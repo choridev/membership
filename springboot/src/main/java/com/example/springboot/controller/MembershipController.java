@@ -30,56 +30,62 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequiredArgsConstructor
 public class MembershipController {
 
-    private final MembershipService membershipService;
+    // private final MembershipService membershipService;
 
-    @PostMapping("/api/v1/memberships")
-    public ResponseEntity<MembershipAddResponseDto> addMembership(
-            @RequestHeader(USER_ID_HEADER) final String userId,
-            @RequestBody @Valid final MembershipRequestDto membershipRequestDto) {
+    // @PostMapping("/api/v1/memberships")
+    // public ResponseEntity<MembershipAddResponseDto> addMembership(
+    // @RequestHeader(USER_ID_HEADER) final String userId,
+    // @RequestBody @Valid final MembershipRequestDto membershipRequestDto) {
 
-        final MembershipAddResponseDto membershipAddResponseDto = membershipService
-                .addMembership(userId,
-                        membershipRequestDto.getMembershipType(),
-                        membershipRequestDto.getPoint());
+    // final MembershipAddResponseDto membershipAddResponseDto = membershipService
+    // .addMembership(userId,
+    // membershipRequestDto.getMembershipType(),
+    // membershipRequestDto.getPoint());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(membershipAddResponseDto);
-    }
+    // return
+    // ResponseEntity.status(HttpStatus.CREATED).body(membershipAddResponseDto);
+    // }
 
-    @GetMapping("/api/v1/memberships")
-    public ResponseEntity<List<MembershipDetailResponseDto>> getMembershipList(
-            @RequestHeader(USER_ID_HEADER) final String userId) {
+    // @GetMapping("/api/v1/memberships")
+    // public ResponseEntity<List<MembershipDetailResponseDto>> getMembershipList(
+    // @RequestHeader(USER_ID_HEADER) final String userId) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(membershipService.getMembershipList(userId));
-    }
+    // return
+    // ResponseEntity.status(HttpStatus.OK).body(membershipService.getMembershipList(userId));
+    // }
 
-    @GetMapping("/api/v1/memberships/{id}")
-    public ResponseEntity<MembershipDetailResponseDto> getMembership(
-            @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable("id") final Long id) {
+    // @GetMapping("/api/v1/memberships/{id}")
+    // public ResponseEntity<MembershipDetailResponseDto> getMembership(
+    // @RequestHeader(USER_ID_HEADER) final String userId,
+    // @PathVariable("id") final Long id) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(membershipService.getMembership(id, userId));
-    }
+    // return
+    // ResponseEntity.status(HttpStatus.OK).body(membershipService.getMembership(id,
+    // userId));
+    // }
 
-    @DeleteMapping("/api/v1/memberships/{id}")
-    public ResponseEntity<Void> removeMembership(
-            @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable("id") final Long id) {
+    // @DeleteMapping("/api/v1/memberships/{id}")
+    // public ResponseEntity<Void> removeMembership(
+    // @RequestHeader(USER_ID_HEADER) final String userId,
+    // @PathVariable("id") final Long id) {
 
-        membershipService.removeMembership(id, userId);
+    // membershipService.removeMembership(id, userId);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+    // return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    // }
 
-    @PatchMapping("/api/v1/memberships/{id}")
-    public ResponseEntity<MembershipPointResponseDto> addMembershipPoint(
-            @RequestHeader(USER_ID_HEADER) final String userId,
-            @PathVariable("id") final Long id,
-            @RequestBody @Valid final MembershipPointRequestDto membershipPointRequestDto) {
+    // @PatchMapping("/api/v1/memberships/{id}")
+    // public ResponseEntity<MembershipPointResponseDto> addMembershipPoint(
+    // @RequestHeader(USER_ID_HEADER) final String userId,
+    // @PathVariable("id") final Long id,
+    // @RequestBody @Valid final MembershipPointRequestDto
+    // membershipPointRequestDto) {
 
-        final MembershipPointResponseDto membershipPointResponseDto = membershipService
-                .addMembershipPoint(id, userId, membershipPointRequestDto.getPoint());
+    // final MembershipPointResponseDto membershipPointResponseDto =
+    // membershipService
+    // .addMembershipPoint(id, userId, membershipPointRequestDto.getPoint());
 
-        return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
-    }
+    // return ResponseEntity.status(HttpStatus.OK).body(membershipPointResponseDto);
+    // }
 
 }
