@@ -34,6 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Build and analyze
+        working-directory: springboot
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar --info
@@ -49,7 +50,7 @@ jobs:
             [
               {
                 "author": {
-                  "name": "${{ github.event.pull_request.user.login }}",
+                  "name": "${{ github.event.pull_request.user.login }}"
                 },
                 "title": "#${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}",
                 "color": 10478271,
@@ -80,7 +81,7 @@ jobs:
             [
               {
                 "author": {
-                  "name": "${{ github.event.pull_request.user.login }}",
+                  "name": "${{ github.event.pull_request.user.login }}"
                 },
                 "title": "#${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}",
                 "color": 13458524,
